@@ -4,8 +4,8 @@
 
 typedef struct
 {
-	int x;
-	int y;
+    int x;
+    int y;
 } Point;
 
 #define COUNT 10
@@ -14,28 +14,28 @@ double minLength;
 char shortestPath[COUNT * 2];
 
 Point points[COUNT] = {
-	{327, 95},
-	{389, 92},
-	{581, 152},
-	{511, 229},
-	{708, 242},
-	{280, 284},
-	{397, 311},
-	{609, 360},
-	{448, 411},
-	{259, 437},
-	//{579, 495},
-	//{427, 540}
+    {327, 95},
+    {389, 92},
+    {581, 152},
+    {511, 229},
+    {708, 242},
+    {280, 284},
+    {397, 311},
+    {609, 360},
+    {448, 411},
+    {259, 437},
+    //{579, 495},
+    //{427, 540}
 };
 
 void swap(int * a, int * b)
 {
     if(*a != *b)
     {
-	    int tmp = *a;
-	    *a = *b;
-	    *b = tmp;
-	}
+        int tmp = *a;
+        *a = *b;
+        *b = tmp;
+    }
 }
 
 void setPathToString(int * indices)
@@ -51,21 +51,21 @@ void setPathToString(int * indices)
 
 double distance(int px, int py, int qx, int qy)
 {
-	return sqrt(pow(qx - px, 2) + pow(qy - py, 2));
+    return sqrt(pow(qx - px, 2) + pow(qy - py, 2));
 }
 
 double pointDistance(Point * p, Point * q)
 {
-	return distance(p->x, p->y, q->x, q->y);
+    return distance(p->x, p->y, q->x, q->y);
 }
 
 void calculatePath(int * indices)
 {
-	double path = 0.0;
+    double path = 0.0;
     int prev = -1;
 
     for(int i = 0; i < COUNT; i++) {
-    	int current = indices[i];
+        int current = indices[i];
 
         if(prev > -1)
         {
@@ -89,8 +89,8 @@ void calculatePath(int * indices)
 
 void recSwap(int * list, int k, int m)
 {
-	if(k == m)
-	{
+    if(k == m)
+    {
         calculatePath(list);
     }
     else
@@ -108,7 +108,7 @@ void recSwap(int * list, int k, int m)
 
 void calculateShortestPath()
 {
-	minLength = 99999999999.9;
+    minLength = 99999999999.9;
 
     int indices[COUNT];
 
@@ -122,15 +122,15 @@ void calculateShortestPath()
 
 int main()
 {
-	clock_t start = clock();
+    clock_t start = clock();
 
-	calculateShortestPath();
+    calculateShortestPath();
 
-	double diff = clock() - start;
+    double diff = clock() - start;
 
-	printf("length: %f\n", minLength);
+    printf("length: %f\n", minLength);
     printf("path: %s\n", shortestPath);
-	printf("time (sec): %f\n", diff / CLOCKS_PER_SEC);
+    printf("time (sec): %f\n", diff / CLOCKS_PER_SEC);
 
-	return 0;
+    return 0;
 }

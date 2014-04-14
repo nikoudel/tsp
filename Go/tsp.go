@@ -1,15 +1,15 @@
 package main
 
 import (
-	"fmt"
-	"math"
-	"bytes"
-	"os"
-	"time"
+    "fmt"
+    "math"
+    "bytes"
+    "os"
+    "time"
 )
 
 type Point struct {
-	X, Y int
+    X, Y int
 }
 
 var points []Point
@@ -18,14 +18,14 @@ var shortestPath string
 var sb bytes.Buffer
 
 func main() {
-	
-	initialize()
+    
+    initialize()
 
-	begin := time.Now()
+    begin := time.Now()
 
-	calculateShortestPath()
+    calculateShortestPath()
 
-	diff := time.Since(begin)
+    diff := time.Since(begin)
 
     fmt.Printf("length: %v\n", minLength)
     fmt.Printf("path: %v\n", shortestPath)
@@ -35,27 +35,27 @@ func main() {
 }
 
 func initialize() {
-	
-	points = []Point {
-		Point{327, 95},
-		Point{389, 92},
-		Point{581, 152},
-		Point{511, 229},
-		Point{708, 242},
-		Point{280, 284},
-		Point{397, 311},
-		Point{609, 360},
-		Point{448, 411},
-		Point{259, 437},
-		//Point{579, 495},
-		//Point{427, 540},
-	}
+    
+    points = []Point {
+        Point{327, 95},
+        Point{389, 92},
+        Point{581, 152},
+        Point{511, 229},
+        Point{708, 242},
+        Point{280, 284},
+        Point{397, 311},
+        Point{609, 360},
+        Point{448, 411},
+        Point{259, 437},
+        //Point{579, 495},
+        //Point{427, 540},
+    }
 }
 
 func calculateShortestPath() {
-	
-	minLength = math.Inf(0)
-	sb.Reset()
+    
+    minLength = math.Inf(0)
+    sb.Reset()
 
     indices := make([]int, len(points))
 
@@ -68,9 +68,9 @@ func calculateShortestPath() {
 
 func recSwap(list []int, k int, m int) {
 
-	//sb.WriteString(fmt.Sprintf("k = %v, m = %v, list = %v\n", k, m, pathToString(list)))
+    //sb.WriteString(fmt.Sprintf("k = %v, m = %v, list = %v\n", k, m, pathToString(list)))
 
-	if k == m {
+    if k == m {
         calculatePath(list);
     } else {
 
@@ -86,8 +86,8 @@ func recSwap(list []int, k int, m int) {
 }
 
 func calculatePath(indices []int) {
-	
-	path := 0.0;
+    
+    path := 0.0;
     prev := -1;
 
     for _, current := range indices {
@@ -112,52 +112,52 @@ func calculatePath(indices []int) {
 
 func pointDistance(p Point, q Point) float64 {
 
-	return distance(p.X, p.Y, q.X, q.Y)
+    return distance(p.X, p.Y, q.X, q.Y)
 }
 
 func distance(px int, py int, qx int, qy int) float64 {
 
-	return math.Sqrt(math.Pow(float64(qx) - float64(px), 2) + math.Pow(float64(qy) - float64(py), 2))
+    return math.Sqrt(math.Pow(float64(qx) - float64(px), 2) + math.Pow(float64(qy) - float64(py), 2))
 }
 
 func pathToString(indices []int) string {
-	
-	shortestPath := ""
+    
+    shortestPath := ""
 
-	for _, current := range indices {
+    for _, current := range indices {
 
-		shortestPath += fmt.Sprintf("%v-", current)
-	}
+        shortestPath += fmt.Sprintf("%v-", current)
+    }
 
-	return shortestPath[:len(shortestPath) - 1]
+    return shortestPath[:len(shortestPath) - 1]
 }
 
 func swap(a *int, b *int) {
 
     if *a != *b {
 
-	    tmp := *a
-	    *a = *b
-	    *b = tmp
-	}
+        tmp := *a
+        *a = *b
+        *b = tmp
+    }
 }
 
 func writeLog() {
 
-	if sb.Len() > 0 {
+    if sb.Len() > 0 {
 
-		f, err := os.Create("c:\\temp\\tspbf.go.log")
+        f, err := os.Create("c:\\temp\\tspbf.go.log")
 
-	    if err != nil {
-	    	panic(err)
-	    }
+        if err != nil {
+            panic(err)
+        }
 
-	    defer f.Close()
+        defer f.Close()
 
-	    _, err = f.Write(sb.Bytes())
+        _, err = f.Write(sb.Bytes())
 
-	    if err != nil {
-	    	panic(err)
-	    }	
-	}
+        if err != nil {
+            panic(err)
+        }    
+    }
 }
